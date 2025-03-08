@@ -1,20 +1,28 @@
 package fronteira;
 
-
 import java.util.List;
 import java.util.Scanner;
 
+import controller.AtorController;
 import controller.FilmeController;
+import model.Ator;
 import model.Filme;
 
 public class Main {
 
 	public static void main(String[] args) {
-
-		Scanner scanner = new Scanner(System.in);
-		String nomeFilme;
-		Filme f1 = new Filme ( );
 		FilmeController fControl = new FilmeController();
+		AtorController aControl = new AtorController();
+
+		Scanner sc = new Scanner(System.in);
+
+		String nomeFilme = "";
+		String nomeAtor = "";
+		String opt = "";
+
+		Filme f1 = new Filme();
+		Ator a1 = new Ator();
+
 		int escolha;
 
 		do {
@@ -37,88 +45,145 @@ public class Main {
 			System.out.print("\n");
 
 			System.out.print("Escolha uma opção: ");
-			escolha = scanner.nextInt();
+			escolha = sc.nextInt();
 
 			switch (escolha) {
-			case 1:// utilize o Scanner para captar dados
-				System.out.println("Inserir Filme");
-				f1.setId(0);
-				f1.setTitulo("Cidade de Deus");
-				f1.setNomeDiretor("Ze Trindade");
-				fControl.inserirFilme(f1);		
+
+			case 1: // INSERIR FILME
+				System.out.println("Digite o título do filme: ");
+				opt = sc.nextLine();
+				f1.setTitulo(opt);
+
+				System.out.println("Digite o diretor do filme: ");
+				opt = sc.nextLine();
+
+				fControl.inserirFilme(f1);
+
 				break;
-				
-			case 2:
-				System.out.println("Pesquisar um filme = ");
-				nomeFilme = scanner.next();
-				List<Filme> filmes = fControl.pesquisarUmFilme(nomeFilme);	
+
+			case 2: // PESQUISAR FILME
+				System.out.println("Digite um título de filme para pesquisar: ");
+				nomeFilme = sc.nextLine();
+
+				List<Filme> filmes = fControl.pesquisarUmFilme(nomeFilme);
+
 				if (!(filmes.isEmpty())) {
-					for (Filme filme : filmes ) {
-						System.out.println("Nome: " + filme.getTitulo() + " Id= " + filme.getId()+ " Diretor: " + filme.getNomeDiretor());
+					for (Filme filme : filmes) {
+						System.out.println("#" + filme.getId() + " | Título: " + filme.getTitulo() + " | Diretor: "
+								+ filme.getNomeDiretor());
 					}
+				} else {
+					System.out.println("Filme(s) não encontrado(s)");
 				}
-				else System.out.println("Não encontrou o Filme");
-				scanner.nextLine();
+
 				break;
-				
-			case 3:
-				System.out.println("Listando Todos os Filmes");
-				filmes = fControl.pesquisarTodos();	
+
+			case 3: // LISTAR TODOS FILMES
+				System.out.println("Lista de Filmes Disponíveis: ");
+
+				filmes = fControl.pesquisarTodos();
+
 				if (!(filmes.isEmpty())) {
-					for (Filme filme : filmes ) {
-						System.out.println("Id= " + filme.getId() + " Nome: " + filme.getTitulo() + ", Diretor: " + filme.getNomeDiretor());
+					for (Filme filme : filmes) {
+						System.out.println("#" + filme.getId() + " | Título: " + filme.getTitulo() + " | Diretor: "
+								+ filme.getNomeDiretor());
 					}
+				} else {
+					System.out.println("Filme(s) não encontrado(s)");
 				}
-				else System.out.println("Não encontrou o Filme");
+
 				break;
-				
-			case 4:
-				System.out.println("Escolha um filme para atualizar ");
-				long id = scanner.nextLong();
+
+			case 4: // ATUALIZAR FILME
+				System.out.println("Digite o ID do filme que deseja atualizar: ");
+				long id = sc.nextLong();
 				f1.setId(id);
-				f1.setTitulo("Terminator");
-				f1.setNomeDiretor("James Cammeron");
+				System.out.println("Digite o novo título do filme: ");
+				opt = sc.nextLine();
+				f1.setTitulo(opt);
+
+				System.out.println("Digite o novo diretor do filme: ");
+				opt = sc.nextLine();
 				fControl.atualizar(f1);
+
 				break;
-			case 5:
-				System.out.println("Escolha um filme para apagar ");
-				 id = scanner.nextLong();
+
+			case 5: // REMOVER FILME
+				System.out.println("Digite o ID do filme que deseja remover: ");
+				id = sc.nextLong();
 				fControl.apagar(id);
-				break;	
-			case 6:
-				System.out.println("Inserir ator ");
-//				long id = scanner.nextLong();
-//				fControl.apagar(id);
+
 				break;
-			case 7:
-				System.out.println("Pesquisar ator ");
-				
+
+			case 6: // INSERIR ATOR(A)
+				a1.setId(0);
+				System.out.println("Digite o nome do ator(a): ");
+				opt = sc.nextLine();
+				a1.setNome(opt);
+
+				System.out.println("Digite o país de origem do ator(a): ");
+				opt = sc.nextLine();
+				a1.setPais(opt);
+
+				aControl.inserir(a1);
+
 				break;
-			case 8:
-				System.out.println("Escolha um ator para apagar ");
-				
+
+			case 7: // PESQUISAR ATOR(A)
+				System.out.println("Digite um nome de ator(a) para pesquisar: ");
+				nomeAtor = sc.nextLine();
+
+				List<Ator> atores = aControl.pesquisarPorNome(nomeAtor);
+
+				if (!(atores.isEmpty())) {
+					for (Ator ator : atores) {
+						System.out.println(
+								"#" + ator.getId() + " | Nome: " + ator.getNome() + " | País: " + ator.getPais());
+					}
+				} else {
+					System.out.println("Ator(a) não encontrado(a)");
+				}
+
 				break;
-			case 9:
-				System.out.println("Escolha um ator para atualizar ");
-				
+
+			case 8: // REMOVER ATOR
+				System.out.println("Digite o ID de um(a) ator(a) que deseja remover: ");
+				id = sc.nextLong();
+				aControl.remover(id);
+
 				break;
-			case 10:
+
+			case 9: // ATUALIZAR ATOR
+				System.out.println("Digite o ID de um(a) ator(a) que deseja atualizar: ");
+				id = sc.nextLong();
+				a1.setId(id);
+
+				System.out.println("Digite o novo nome do(a) autor(a): ");
+				opt = sc.nextLine();
+				a1.setNome(opt);
+
+				System.out.println("Digite o novo país de origem do(a) autor(a): ");
+				opt = sc.nextLine();
+
+				aControl.atualizar(a1);
+
+				break;
+
+			case 10: // PARTICIPAÇÃO DO ATOR(A) EM UM FILME
 				System.out.println("Participação do ator no filme ");
-				
+
 				break;
-				
-				
+
 			case 11:
-				System.out.println("Saindo do menu.");
+				System.out.println("ENCERRANDO APLICAÇÃO!");
+				
 				break;
+				
 			default:
-				System.out.println("Opção inválida"
-						+ ". Tente novamente.");
+				System.out.println("Opção inválida! Tente novamente!");
 			}
 		} while (escolha != 11);
 
-		scanner.close();
+		sc.close();
 	}
 }
-
-

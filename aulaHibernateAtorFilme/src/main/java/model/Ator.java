@@ -2,6 +2,7 @@ package model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -10,7 +11,7 @@ import javax.persistence.OneToOne;
 public class Ator {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	private String nome;
@@ -42,5 +43,10 @@ public class Ator {
 
 	public void setPais(String pais) {
 		this.pais = pais;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+		
 	}
 }
