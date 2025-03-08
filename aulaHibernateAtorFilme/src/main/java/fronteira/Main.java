@@ -18,20 +18,23 @@ public class Main {
 		int escolha;
 
 		do {
-			System.out.println("Menu:");
-			System.out.println("1. Inserir Filme");
-			System.out.println("2. Pequisar um Filme");
-			System.out.println("3. Listar Todos");
-			System.out.println("4. Atualizar um Filme");
-			System.out.println("5. Apagar um Filme");
-			System.out.println("=======================");
-			System.out.println("6. Inserir Ator");
-			System.out.println("7. Pequisar um Ator");
-			System.out.println("8. Apagar um Ator");
-			System.out.println("9. Atualizar um Ator");
-			System.out.println("=======================");
-			System.out.println("10. Participação Ator no Filme");
-			System.out.println("11. Sair");
+			System.out.println("\n\nBem Vindo(a) ao Banco de Dados do Cinema");
+			System.out.println("Digite um valor para escolher a opção: ");
+			System.out.println("\n//////////////// Filme //////////////////\n");
+			System.out.println("1 - Inserir Filme");
+			System.out.println("2 - Pequisar um Filme");
+			System.out.println("3 - Listar Todos");
+			System.out.println("4 - Atualizar um Filme");
+			System.out.println("5 - Apagar um Filme");
+			System.out.println("\n//////////////// Ator //////////////////\n");
+			System.out.println("6 - Inserir Ator");
+			System.out.println("7 - Pequisar um Ator");
+			System.out.println("8 - Apagar um Ator");
+			System.out.println("9 - Atualizar um Ator");
+			System.out.println("\n//////////////// Participações //////////////////\n");
+			System.out.println("10 - Participação Ator no Filme");
+			System.out.println("11 - Sair");
+			System.out.print("\n");
 
 			System.out.print("Escolha uma opção: ");
 			escolha = scanner.nextInt();
@@ -88,7 +91,7 @@ public class Main {
 //				fControl.apagar(id);
 				break;
 			case 7:
-				System.out.println("Escolha um ator para apagar ");
+				System.out.println("Pesquisar ator ");
 				
 				break;
 			case 8:
@@ -96,11 +99,11 @@ public class Main {
 				
 				break;
 			case 9:
-				System.out.println("Escolha um ator para apagar ");
+				System.out.println("Escolha um ator para atualizar ");
 				
 				break;
 			case 10:
-				System.out.println("XXXX ");
+				System.out.println("Participação do ator no filme ");
 				
 				break;
 				
