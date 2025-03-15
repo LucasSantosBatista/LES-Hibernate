@@ -15,6 +15,7 @@ public class Main {
 		AtorController aControl = new AtorController();
 
 		Scanner sc = new Scanner(System.in);
+		Scanner sc2 = new Scanner(System.in);
 
 		String nomeFilme = "";
 		String nomeAtor = "";
@@ -26,7 +27,8 @@ public class Main {
 		int escolha;
 
 		do {
-			System.out.println("\n\nBem Vindo(a) ao Banco de Dados do Cinema");
+			System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			System.out.println("\n\nBanco de Dados do Cinema");
 			System.out.println("Digite um valor para escolher a opção: ");
 			System.out.println("\n//////////////// Filme //////////////////\n");
 			System.out.println("1 - Inserir Filme");
@@ -41,21 +43,19 @@ public class Main {
 			System.out.println("9 - Atualizar um Ator");
 			System.out.println("\n//////////////// Participações //////////////////\n");
 			System.out.println("10 - Participação Ator no Filme");
-			System.out.println("11 - Sair");
-			System.out.print("\n");
+			System.out.println("11 - Sair\n");
 
 			System.out.print("Escolha uma opção: ");
-			escolha = sc.nextInt();
+			escolha = sc2.nextInt();
 
 			switch (escolha) {
 
 			case 1: // INSERIR FILME
 				System.out.println("Digite o título do filme: ");
-				opt = sc.nextLine();
-				f1.setTitulo(opt);
+				f1.setTitulo(sc.nextLine());
 
 				System.out.println("Digite o diretor do filme: ");
-				opt = sc.nextLine();
+				f1.setNomeDiretor(sc.nextLine());
 
 				fControl.inserirFilme(f1);
 
@@ -96,34 +96,31 @@ public class Main {
 
 			case 4: // ATUALIZAR FILME
 				System.out.println("Digite o ID do filme que deseja atualizar: ");
-				long id = sc.nextLong();
-				f1.setId(id);
+				f1.setId(sc.nextLong());
+
 				System.out.println("Digite o novo título do filme: ");
-				opt = sc.nextLine();
-				f1.setTitulo(opt);
+				f1.setTitulo(sc.nextLine());
 
 				System.out.println("Digite o novo diretor do filme: ");
-				opt = sc.nextLine();
+				f1.setNomeDiretor(sc.nextLine());
+
 				fControl.atualizar(f1);
 
 				break;
 
 			case 5: // REMOVER FILME
 				System.out.println("Digite o ID do filme que deseja remover: ");
-				id = sc.nextLong();
-				fControl.apagar(id);
+				fControl.apagar(sc.nextLong());
 
 				break;
 
 			case 6: // INSERIR ATOR(A)
 				a1.setId(0);
 				System.out.println("Digite o nome do ator(a): ");
-				opt = sc.nextLine();
-				a1.setNome(opt);
+				a1.setNome(sc.nextLine());
 
 				System.out.println("Digite o país de origem do ator(a): ");
-				opt = sc.nextLine();
-				a1.setPais(opt);
+				a1.setPais(sc.nextLine());
 
 				aControl.inserir(a1);
 
@@ -148,22 +145,19 @@ public class Main {
 
 			case 8: // REMOVER ATOR
 				System.out.println("Digite o ID de um(a) ator(a) que deseja remover: ");
-				id = sc.nextLong();
-				aControl.remover(id);
+				aControl.remover(sc.nextLong());
 
 				break;
 
 			case 9: // ATUALIZAR ATOR
 				System.out.println("Digite o ID de um(a) ator(a) que deseja atualizar: ");
-				id = sc.nextLong();
-				a1.setId(id);
+				a1.setId(sc.nextLong());
 
 				System.out.println("Digite o novo nome do(a) autor(a): ");
-				opt = sc.nextLine();
-				a1.setNome(opt);
+				a1.setNome(sc.nextLine());
 
 				System.out.println("Digite o novo país de origem do(a) autor(a): ");
-				opt = sc.nextLine();
+				a1.setPais(sc.nextLine());
 
 				aControl.atualizar(a1);
 
@@ -176,14 +170,21 @@ public class Main {
 
 			case 11:
 				System.out.println("ENCERRANDO APLICAÇÃO!");
-				
+
 				break;
-				
+
 			default:
 				System.out.println("Opção inválida! Tente novamente!");
+
+				
+			case -1:
+				System.out.println("ENCERRANDO APLICAÇÃO!");
+				escolha = 11;
+				break;
 			}
 		} while (escolha != 11);
 
 		sc.close();
+		sc2.close();
 	}
 }
